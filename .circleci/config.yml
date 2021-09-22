@@ -8,20 +8,18 @@ jobs:
   say-hello:
     # Specify the execution environment.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-     docker:
+    docker:
       - image: cimg/base:stable
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-      steps:
+    steps:
       - checkout
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
-
-# Orchestrate or schedule a set of jobs
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  # Name the workflow "welcome"
-  print_hello-workflow:
-    # Run the welcome/run job in its own container
+  say-hello-workflow:
     jobs:
-      - print_hello/run
+      - say-hello
