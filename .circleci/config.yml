@@ -25,7 +25,7 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
-      - run: echo $Name
+      - run: echo $MY_ENV_VAR
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -37,4 +37,4 @@ workflows:
             - print_hello
       - print_name:
           requires:
-            - print_hello
+            - print_world
