@@ -2,21 +2,22 @@
 version: 2.1
 jobs:
   print_hello:
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run: echo Hello
+  # Add a job
   print_world:
-    # Specify the execution environment.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
+     docker:
       - image: circleci/node:13.8.0
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - run: echo World
+  print_env_var:
+      docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo $MY_ENV_VAR
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -26,3 +27,6 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - print_env_var:
+          requires:
+            - print_world
